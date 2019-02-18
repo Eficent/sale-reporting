@@ -6,6 +6,28 @@ from odoo import tools
 
 
 def populate_base_comment_template(cr):
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='base_comment_template' AND
+    column_name='old_id'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE base_comment_template
+            ADD COLUMN old_id
+            integer;
+            """)
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='base_comment_template' AND
+    column_name='_old_module_type'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE base_comment_template
+            ADD COLUMN _old_module_type
+            text;
+            """)
     cr.execute(
         """
         INSERT INTO base_comment_template (name, text, position, old_id, _old_module_type)
