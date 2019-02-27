@@ -66,4 +66,3 @@ def update_sale_order(cr):
 def migrate(cr, version):
     populate_base_comment_template(cr)
     update_sale_order(cr)
-    tools.drop_view_if_exists(cr, 'sale_condition_text')
