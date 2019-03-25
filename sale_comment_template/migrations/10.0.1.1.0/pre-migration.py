@@ -14,5 +14,4 @@ _column_renames = {
 
 @openupgrade.migrate(use_env=False)
 def migrate(cr, version):
-    pass
-    # openupgrade.rename_columns(cr, _column_renames)
+    openupgrade.rename_columns(cr, _column_renames)
